@@ -31,9 +31,10 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT * FROM sh_pro";  // 修改為您的 SQL 查詢
+    $sql =  $sql = "select *
+	from sh_pro
+    join (select MIN(img_id) AS min_img_id, sh_pro_id, img_name from sh_pro_img group by sh_pro_id) AS sub on sh_pro.sh_pro_id = sub.sh_pro_id;";
 
-    // 準備 SQL 查詢 ($shOder、$shOderData(通常為***Data)為自訂義名稱)
     $shProduct = $pdo->prepare($sql);
 
     // 執行 SQL 查詢
