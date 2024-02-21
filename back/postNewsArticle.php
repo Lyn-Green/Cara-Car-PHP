@@ -13,25 +13,11 @@ try{
             require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
         }
 
-        //--------------取得上傳檔案
-    // if ($_FILES["prodImageUpFile"]["error"] === 0) {
-    //     $dir = "../../images/products";
-    //     if ( !file_exists($dir) ) {
-    //         mkdir($dir);
-    //     }
-    //     $fileExt = pathinfo($_FILES["prodImageUpFile"]["name"],PATHINFO_EXTENSION);
-    //     $filename = uniqid() . ".$fileExt";
-    //     $from = $_FILES["prodImageUpFile"]["tmp_name"];
-    //     $to = "$dir{$filename}";
-    //     copy($from, $to);
-    // } else {
-    //     $result = ["error" => true, "msg" => "檔案上傳失敗"];
-    // }
 
     // 接收從前端發送過來的資料
     $formData = json_decode(file_get_contents("php://input"), true);
 	
-	// $sql = "insert into tibamefe_cgd103g1.member('mem_name', 'mem_acoount', 'mem_psw') values (:mem_name, :mem_account, :mem_psw)";
+    // SQL 指令
 	$sql = "INSERT INTO news (news_title, news_content, news_start_date, news_end_date, img_path, news_category, news_state) VALUES 
 	(:news_title, :news_content, :news_start_date, :news_end_date, :img_path, :news_category, :news_state);";
     
