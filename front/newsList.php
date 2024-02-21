@@ -15,23 +15,22 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT * FROM sh_pro";  // 修改為您的 SQL 查詢
+    $sql = "select * from news ";
 
     // 準備 SQL 查詢
-    $products = $pdo->prepare($sql);
+    $newsList = $pdo->prepare($sql);
 
     // 執行 SQL 查詢
-    $products->execute();
+    $newsList->execute();
 
     // 檢查是否有資料
-    if ($products->rowCount() > 0) {
-        $productsData = $products->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($productsData);
+    if ($newsList->rowCount() > 0) {
+        $newsData = $newsList->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($newsData);
     } else {
         echo json_encode(["errMsg" => ""]);
     }
 } catch (PDOException $e) {
-    //準備要回傳給前端的資料
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
 }
 ?>

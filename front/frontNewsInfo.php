@@ -15,7 +15,7 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT * FROM sh_pro";  // 修改為您的 SQL 查詢
+    $sql = "SELECT * FROM news";  // 修改為您的 SQL 查詢
 
     // 準備 SQL 查詢
     $products = $pdo->prepare($sql);
@@ -31,7 +31,6 @@ try {
         echo json_encode(["errMsg" => ""]);
     }
 } catch (PDOException $e) {
-    //準備要回傳給前端的資料
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
 }
 ?>

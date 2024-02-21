@@ -13,25 +13,39 @@ try {
         // 生產環境
         require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
     }
+    // 取得本頁的id
+    $pageId = $_GET['pageId'];
 
     // SQL 查詢
-    $sql = "SELECT * FROM sh_pro";  // 修改為您的 SQL 查詢
+    $sql = "SELECT * FROM sh_pro_img";
 
     // 準備 SQL 查詢
-    $products = $pdo->prepare($sql);
+    $proImgs = $pdo->prepare($sql);
 
     // 執行 SQL 查詢
-    $products->execute();
+    $proImgs->execute();
 
     // 檢查是否有資料
-    if ($products->rowCount() > 0) {
-        $productsData = $products->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($productsData);
+    if ($proImgs->rowCount() > 0) {
+        $proImgsData = $proImgs->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($proImgsData);
     } else {
         echo json_encode(["errMsg" => ""]);
     }
+    // // 準備 SQL 查詢
+    // $proImgs = $pdo->prepare($sql);
+
+    // // 執行 SQL 查詢
+    // $proImgs->execute();
+
+    // // 檢查是否有資料
+    // if ($proImgs->rowCount() > 0) {
+    //     $proImgsData = $proImgs->fetchAll(PDO::FETCH_ASSOC);
+    //     echo json_encode($proImgsData);
+    // } else {
+    //     echo json_encode(["errMsg" => ""]);
+    // }
 } catch (PDOException $e) {
-    //準備要回傳給前端的資料
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
 }
 ?>

@@ -13,25 +13,24 @@ try {
         // 生產環境
         require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
     }
-
-    // SQL 查詢
-    $sql = "SELECT * FROM sh_pro";  // 修改為您的 SQL 查詢
-
+    
+    $thisMem_id = $_GET['member_id']; //先定義登入者的id是多少
+    // 編寫好 SQL 查詢
+    $sql = "SELECT * FROM member WHERE member_id = :member_id";  // :member_id在下方定義(20行)
     // 準備 SQL 查詢
-    $products = $pdo->prepare($sql);
-
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':member_id', $thisMem_id, PDO::PARAM_INT); //安全性的需求準備使用PDO的方法bindParam(佔位符)準備給$thisMem_id
     // 執行 SQL 查詢
-    $products->execute();
+    $stmt->execute();
 
     // 檢查是否有資料
-    if ($products->rowCount() > 0) {
-        $productsData = $products->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($productsData);
+    if ($stmt->rowCount() > 0) {
+        $memberData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($memberData);
     } else {
-        echo json_encode(["errMsg" => ""]);
+        echo json_encode(["errMsg" => "發生錯誤囉"]);
     }
 } catch (PDOException $e) {
-    //準備要回傳給前端的資料
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
 }
 ?>

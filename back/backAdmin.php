@@ -1,6 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *"); // 允許所有來源
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 try {
     // 連線 MySQL
