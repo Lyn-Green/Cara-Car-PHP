@@ -5,24 +5,18 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 try {
-    // 連線 MySQL
-    // if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-        // 開發環境
         require_once("../connectChd104g6.php");
-    // } else {
-        // 生產環境
-    //     require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
-    // }
 
     // 檢查是否有收到值
     if(isset($_POST['member_id'])) {
-        $member_id = $_POST['member_id']; 
         // SQL 更新
         $sql = "UPDATE member SET 
-                    m_name = :m_name,
-                    m_phone = :m_phone,
-                    m_birthday = :m_birthday,
+                    m_name = :m_name
+                    m_phone = :m_phone
+                    m_birthday = :m_birthday
                     m_email = :m_email,
+                    m_city = :m_city
+                    m_district = :m_district
                     m_address = :m_address
                 WHERE member_id = :member_id";
 
@@ -32,6 +26,8 @@ try {
         $updateMemberProfile->bindValue(':m_phone', $_POST["m_phone"]);
         $updateMemberProfile->bindValue(':m_birthday', $_POST["m_birthday"]);
         $updateMemberProfile->bindValue(':m_email', $_POST["m_email"]);
+        $updateMemberProfile->bindValue(':m_city', $_POST["m_city"]);
+        $updateMemberProfile->bindValue(':m_district', $_POST["m_district"]);
         $updateMemberProfile->bindValue(':m_address', $_POST["m_address"]);
         $updateMemberProfile->bindValue(':member_id', $_POST["member_id"]);
         // 執行 SQL 更新
