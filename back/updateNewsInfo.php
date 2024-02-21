@@ -21,28 +21,28 @@ try{
 	// $sql = "INSERT INTO news (news_title, news_content, news_start_date, news_end_date, img_path, news_category, news_state) VALUES 
 	// (:news_title, :news_content, :news_start_date, :news_end_date, :img_path, :news_category, :news_state);";
 	
-    $sql = "UPDATE news SET (
+    $sql = "UPDATE news SET 
     news_title = :news_title, 
     news_content = :news_content, 
     news_start_date = :news_start_date, 
     news_end_date = :news_end_date, 
     img_path = :img_path, 
-    news_category = :news_category, 
-    news_state = :news_state ) 
+    news_category = :news_category
     WHERE 
-    news_id = :news_id; ";
+    news_id = :news_id";
     
 	//編譯, 執行
     $stmt = $pdo->prepare($sql);
 
     // 綁定參數並執行
+    $stmt->bindParam(":news_id", $formData['newsId']);
     $stmt->bindParam(":news_title", $formData['eventTitle']);
     $stmt->bindParam(":news_content", $formData['eventInformation']);
     $stmt->bindParam(":news_start_date", $formData['startDate']);
     $stmt->bindParam(":news_end_date", $formData['endDate']);
     $stmt->bindParam(":img_path", $formData['eventImg']);
     $stmt->bindParam(":news_category", $formData['classify']);
-    $stmt->bindParam(":news_state", $formData['disLaunch']);
+    // $stmt->bindParam(":news_state", $formData['disLaunch']);
 
     $stmt->execute();
 
@@ -52,6 +52,8 @@ catch (PDOException $e) {
 	$msg = "錯誤行號 : ".$e->getLine().", 錯誤訊息 : ".$e->getMessage();
 }
 //輸出結果
-$result = ["msg"=>$msg];
+$result = ["msg"=>$msg, "sql" => $sql, $formData['news_id']];
 echo json_encode($result);
 ?>
+
+
