@@ -36,8 +36,6 @@ try{
     $stmt->execute();
 
     $msg = "新增消息成功";
-    
-
 }
 catch (PDOException $e) {
 	$msg = "錯誤行號 : ".$e->getLine().", 錯誤訊息 : ".$e->getMessage();
@@ -45,5 +43,4 @@ catch (PDOException $e) {
 //輸出結果
 $result = ["msg"=>$msg];
 echo json_encode($result);
-
 ?>
