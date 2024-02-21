@@ -13,25 +13,23 @@ try {
         // 生產環境
         require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
     }
-    // 取得本頁的id
-    $pageId = $_GET['pageId'];
 
     // SQL 查詢
-    $sql = "select sh_pro_img.img_id, sh_pro_img.img_name 
-    from sh_pro join sh_pro_img on sh_pro_id = sh_pro_img.sh_pro_id
-    where sh_pro_img.sh_pro_id = {$pageId}";
-
+    $sql = "SELECT  member.member_id, sh_pro.sh_pro_id, sh_pro.sh_pro_name, sh_ord.sh_ord_date, sh_ord.ord_del_state
+    FROM sh_ord
+    JOIN member ON sh_ord.member_id = member.member_id
+    JOIN sh_pro ON sh_ord.sh_pro_id = sh_pro.sh_pro_id";  // 修改為您的 SQL 查詢
 
     // 準備 SQL 查詢
-    $proImgs = $pdo->prepare($sql);
+    $shProducts = $pdo->prepare($sql);
 
     // 執行 SQL 查詢
-    $proImgs->execute();
+    $shProducts->execute();
 
     // 檢查是否有資料
-    if ($sh_proImgs->rowCount() > 0) {
-        $sh_proImgsData = $sh_proImgs->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($sh_proImgsData);
+    if ($shProducts->rowCount() > 0) {
+        $shProductsData = $shProducts->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($shProductsData);
     } else {
         echo json_encode(["errMsg" => ""]);
     }
