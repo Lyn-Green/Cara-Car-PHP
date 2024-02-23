@@ -18,24 +18,27 @@ try{
     $formData = json_decode(file_get_contents("php://input"), true);
 	
     // SQL 指令
-	$sql = "INSERT INTO news (news_title, news_content, news_start_date, news_end_date, img_path, news_category, news_state) VALUES 
-	(:news_title, :news_content, :news_start_date, :news_end_date, :img_path, :news_category, :news_state);";
+    $sql = "insert into sh_pro (sh_pro_name, sh_pro_en_name, sh_pro_year, sh_pro_price, sh_pro_intro, sh_pro_situation, sh_pro_state, launch_date, sh_pro_pin, sh_pro_info) values ( :sh_pro_name, :sh_pro_en_name, :sh_pro_year, :sh_pro_price, :sh_pro_intro, :sh_pro_situation, :sh_pro_state,  :launch_date, :sh_pro_pin, :sh_pro_info)";
     
 	//編譯, 執行
-    $stmt = $pdo->prepare($sql);
+    $shPro = $pdo->prepare($sql);
 
     // 綁定參數並執行
-    $stmt->bindParam(":news_title", $formData['eventTitle']);
-    $stmt->bindParam(":news_content", $formData['eventInformation']);
-    $stmt->bindParam(":news_start_date", $formData['startDate']);
-    $stmt->bindParam(":news_end_date", $formData['endDate']);
-    $stmt->bindParam(":img_path", $formData['eventImg']);
-    $stmt->bindParam(":news_category", $formData['classify']);
-    $stmt->bindParam(":news_state", $formData['disLaunch']);
 
-    $stmt->execute();
+    $shPro->bindParam(":sh_pro_name", $formData['sh_pro_name']);
+    $shPro->bindParam(":sh_pro_en_name", $formData['sh_pro_en_name']);
+    $shPro->bindParam(":sh_pro_year", $formData['sh_pro_year']);
+    $shPro->bindParam(":sh_pro_price", $formData['sh_pro_price']);
+    $shPro->bindParam(":sh_pro_intro", $formData['sh_pro_intro']);
+    $shPro->bindParam(":sh_pro_info", $formData['sh_pro_info']);
+    $shPro->bindParam(":sh_pro_situation", $formData['sh_pro_situation']);
+    $shPro->bindParam(":sh_pro_state", $formData['sh_pro_state']);
+    $shPro->bindParam(":launch_date", $formData['launch_date']);
+    $shPro->bindParam(":sh_pro_pin", $formData['sh_pro_pin']);
 
-    $msg = "新增消息成功";
+    $shPro->execute();
+
+    $msg = "新增商品成功";
 }
 catch (PDOException $e) {
 	$msg = "錯誤行號 : ".$e->getLine().", 錯誤訊息 : ".$e->getMessage();
