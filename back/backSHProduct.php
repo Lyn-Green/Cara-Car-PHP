@@ -15,7 +15,7 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT * FROM sh_pro";  // 修改為您的 SQL 查詢
+    $sql = "SELECT * FROM sh_pro ORDER BY sh_pro_id";  // 修改為您的 SQL 查詢
 
     // 準備 SQL 查詢
     $products = $pdo->prepare($sql);
