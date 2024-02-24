@@ -1,15 +1,10 @@
 <?php
-header("Access-Control-Allow-Origin:*");
-header("Content-Type:application/json;charset=utf-8");
+header("Access-Control-Allow-Origin: *"); // 允許所有來源
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 try{
-	    // 連線 MySQL
-        if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-            // 開發環境
-            require_once("../connectChd104g6.php");
-        } else {
-            // 生產環境
-            require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
-        }
+    require_once("../connectChd104g6.php");
 
 	// 检查必填字段是否為空
     $requiredFields = array("ord_reciever", "ord_city", "ord_district", "ord_address", "ord_phone");

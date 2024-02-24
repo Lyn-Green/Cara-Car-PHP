@@ -1,15 +1,10 @@
 <?php
-header("Access-Control-Allow-Origin:*");
-header("Content-Type:application/json;charset=utf-8");
+header("Access-Control-Allow-Origin: *"); // 允許所有來源
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 try{
-	    // 連線 MySQL
-        if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-            // 開發環境
-            require_once("../connectChd104g6.php");
-        } else {
-            // 生產環境
-            require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
-        }
+    require_once("../connectChd104g6.php");
 
 	// 检查必填字段是否為空
     $requiredFields = array("sh_ord_reciever", "sh_ord_city", "sh_ord_district", "sh_ord_address", "sh_ord_phone");
@@ -23,11 +18,12 @@ try{
     }
 
 	// $memId = $_GET["member_id"];
-	$sql = "INSERT INTO sh_ord (member_id, sh_ord_reciever, sh_ord_city, sh_ord_district, sh_ord_address, sh_ord_phone, remark, sh_ord_ship, sh_ord_sum, sh_ord_total, ord_del_state) VALUES 
-	(:member_id, :sh_ord_reciever, :sh_ord_city, :sh_ord_district, :sh_ord_address, :sh_ord_phone, :remark, :sh_ord_ship, :sh_ord_sum, :sh_ord_total, :ord_del_state);";
+	$sql = "INSERT INTO sh_ord (sh_pro_id, member_id, sh_ord_reciever, sh_ord_city, sh_ord_district, sh_ord_address, sh_ord_phone, remark, sh_ord_ship, sh_ord_sum, sh_ord_total, ord_del_state) VALUES 
+	(:sh_pro_id ,:member_id, :sh_ord_reciever, :sh_ord_city, :sh_ord_district, :sh_ord_address, :sh_ord_phone, :remark, :sh_ord_ship, :sh_ord_sum, :sh_ord_total, :ord_del_state);";
 	//編譯, 執行
 	$order = $pdo->prepare($sql);	
 
+	$order->bindValue(":sh_pro_id", $_POST["sh_pro_id"]);
 	$order->bindValue(":member_id", $_POST["member_id"]);
 	$order->bindValue(":sh_ord_reciever", $_POST["sh_ord_reciever"]);
 	$order->bindValue(":sh_ord_city", $_POST["sh_ord_city"]);

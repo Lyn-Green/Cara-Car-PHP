@@ -12,39 +12,41 @@ try {
     // 接收從前端發送過來的資料
     $formData = json_decode(file_get_contents("php://input"), true);
     // SQL 
-    $sql = "UPDATE sh_pro SET 
-        pro_name = :sh_pro_name,
-        pro_en_name = :sh_pro_en_name,
-        
-        pro_price = :sh_pro_price,
-        pro_intro = :sh_pro_intro,
-        pro_info = :sh_pro_info,
-        pro_situation = :sh_pro_situation,
-        pro_state = :sh_pro_state,
-        pro_sold = :sh_pro_sold,
-        -- sh_pro_pin = :sh_pro_pin,    
-        launch_date = :launch_date
+    $sql = "UPDATE product SET 
+        pro_name = :pro_name,
+        pro_en_name = :pro_en_name,
+        pro_category = :pro_category,
+        pro_price = :pro_price,
+        pro_intro = :pro_intro,
+        pro_info = :pro_info,
+        launch_date = :launch_date,
+        end_date = :end_date,
+        pro_state = :pro_state,
+        pro_pin = :pro_pin 
     WHERE 
-        sh_pro_id = :sh_pro_id";  
+        pro_id = :pro_id";  
         
         
         // 準備 SQL 更新
-        $shPro = $pdo->prepare($sql);
-        // //將資料放入並執行之
-        $shPro->bindParam(":sh_pro_id",$formData['sh_pro_id']);
-        $shPro->bindParam(":sh_pro_name",$formData['sh_pro_name']);
-        $shPro->bindParam(":sh_pro_en_name",$formData['sh_pro_en_name']);
-        $shPro->bindParam(":sh_pro_year",$formData['sh_pro_year']);
-        $shPro->bindParam(":sh_pro_price",$formData['sh_pro_price']);
-        $shPro->bindParam(":sh_pro_intro", $formData['sh_pro_intro']);
-        $shPro->bindParam(":sh_pro_info", $formData['sh_pro_info']);
-        $shPro->bindParam(":sh_pro_situation",$formData['sh_pro_situation']);
-        $shPro->bindParam(":sh_pro_state",$formData['sh_pro_state']);
-        $shPro->bindParam(":sh_pro_sold",$formData['sh_pro_sold']);
-        // $shPro->bindValue(":sh_pro_pin",$formData['sh_pro_pin']);
-        $shPro->bindParam(":launch_date",$formData['launch_date']);
+        $Pro = $pdo->prepare($sql);
+        // //將資料放入並執行之        
         //$formData[""] 裡面放你要更改的資料庫表單的欄位
-        $shPro->execute();
+        $Pro->bindParam(":pro_id",$formData['pro_id']);
+        $Pro->bindParam(":pro_name",$formData['pro_name']);
+        $Pro->bindParam(":pro_en_name",$formData['pro_en_name']);
+        $Pro->bindParam(":pro_category",$formData['pro_category']);
+        $Pro->bindParam(":pro_price",$formData['pro_price']);
+        $Pro->bindParam(":pro_intro", $formData['pro_intro']);
+        $Pro->bindParam(":pro_info", $formData['pro_info']);
+        $Pro->bindParam(":launch_date",$formData['launch_date']);
+        $Pro->bindParam(":end_date",$formData['end_date']);
+        $Pro->bindParam(":pro_state",$formData['pro_state']);
+        // 把pro_pin的true/false轉換成tinyint用的1/0
+        $pro_pin = $formData['pro_pin'] ? 1 : 0;
+        $Pro->bindParam(":pro_pin", $pro_pin);
+
+
+        $Pro->execute();
         $msg = "修改商品成功";
         // $msg = ["error" => false,"訊息:"=>"修改商品成功"];
     

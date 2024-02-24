@@ -11,12 +11,12 @@ try {
     if(isset($_POST['member_id'])) {
         // SQL 更新
         $sql = "UPDATE member SET 
-                    m_name = :m_name
-                    m_phone = :m_phone
-                    m_birthday = :m_birthday
+                    m_name = :m_name,
+                    m_phone = :m_phone,
+                    m_birthday = :m_birthday,
                     m_email = :m_email,
-                    m_city = :m_city
-                    m_district = :m_district
+                    m_city = :m_city,
+                    m_district = :m_district,
                     m_address = :m_address
                 WHERE member_id = :member_id";
 
