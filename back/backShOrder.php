@@ -15,7 +15,7 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT  member.member_id, sh_pro.sh_pro_id, sh_pro.sh_pro_name, sh_ord.sh_ord_date, sh_ord.ord_del_state
+    $sql = "SELECT  *, member.member_id, sh_pro.sh_pro_id, sh_pro.sh_pro_name 
     FROM sh_ord
     JOIN member ON sh_ord.member_id = member.member_id
     JOIN sh_pro ON sh_ord.sh_pro_id = sh_pro.sh_pro_id";  // 修改為您的 SQL 查詢
@@ -31,7 +31,7 @@ try {
         $shProductsData = $shProducts->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($shProductsData);
     } else {
-        echo json_encode(["errMsg" => ""]);
+        echo json_encode(["errMsg" => "查無資料"]);
     }
 } catch (PDOException $e) {
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);

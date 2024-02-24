@@ -23,11 +23,12 @@ try{
     }
 
 	// $memId = $_GET["member_id"];
-	$sql = "INSERT INTO sh_ord (member_id, sh_ord_reciever, sh_ord_city, sh_ord_district, sh_ord_address, sh_ord_phone, remark, sh_ord_ship, sh_ord_sum, sh_ord_total, ord_del_state) VALUES 
-	(:member_id, :sh_ord_reciever, :sh_ord_city, :sh_ord_district, :sh_ord_address, :sh_ord_phone, :remark, :sh_ord_ship, :sh_ord_sum, :sh_ord_total, :ord_del_state);";
+	$sql = "INSERT INTO sh_ord (sh_pro_id, member_id, sh_ord_reciever, sh_ord_city, sh_ord_district, sh_ord_address, sh_ord_phone, remark, sh_ord_ship, sh_ord_sum, sh_ord_total, ord_del_state) VALUES 
+	(:sh_pro_id ,:member_id, :sh_ord_reciever, :sh_ord_city, :sh_ord_district, :sh_ord_address, :sh_ord_phone, :remark, :sh_ord_ship, :sh_ord_sum, :sh_ord_total, :ord_del_state);";
 	//編譯, 執行
 	$order = $pdo->prepare($sql);	
 
+	$order->bindValue(":sh_pro_id", $_POST["sh_pro_id"]);
 	$order->bindValue(":member_id", $_POST["member_id"]);
 	$order->bindValue(":sh_ord_reciever", $_POST["sh_ord_reciever"]);
 	$order->bindValue(":sh_ord_city", $_POST["sh_ord_city"]);
