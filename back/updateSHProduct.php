@@ -22,7 +22,7 @@ try {
         sh_pro_situation = :sh_pro_situation,
         sh_pro_state = :sh_pro_state,
         sh_pro_sold = :sh_pro_sold,
-        -- sh_pro_pin = :sh_pro_pin,    
+        sh_pro_pin = :sh_pro_pin,    
         launch_date = :launch_date
     WHERE 
         sh_pro_id = :sh_pro_id";  
@@ -41,7 +41,7 @@ try {
         $shPro->bindParam(":sh_pro_situation",$formData['sh_pro_situation']);
         $shPro->bindParam(":sh_pro_state",$formData['sh_pro_state']);
         $shPro->bindParam(":sh_pro_sold",$formData['sh_pro_sold']);
-        // $shPro->bindValue(":sh_pro_pin",$formData['sh_pro_pin']);
+        $shPro->bindParam(":sh_pro_pin",$formData['sh_pro_pin']);
         $shPro->bindParam(":launch_date",$formData['launch_date']);
         //$formData[""] 裡面放你要更改的資料庫表單的欄位
         $shPro->execute();

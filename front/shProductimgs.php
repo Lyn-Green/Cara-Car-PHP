@@ -23,10 +23,10 @@ try {
 
 
     // 準備 SQL 查詢
-    $proImgs = $pdo->prepare($sql);
+    $sh_proImgs = $pdo->prepare($sql);
 
     // 執行 SQL 查詢
-    $proImgs->execute();
+    $sh_proImgs->execute();
 
     // 檢查是否有資料
     if ($sh_proImgs->rowCount() > 0) {

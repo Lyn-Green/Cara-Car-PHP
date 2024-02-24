@@ -18,7 +18,7 @@ try{
     $formData = json_decode(file_get_contents("php://input"), true);
 	
     // SQL 指令
-    $sql = "insert into sh_pro (sh_pro_name, sh_pro_en_name, sh_pro_year, sh_pro_price, sh_pro_intro, sh_pro_situation, sh_pro_state, launch_date, sh_pro_pin, sh_pro_info) values ( :sh_pro_name, :sh_pro_en_name, :sh_pro_year, :sh_pro_price, :sh_pro_intro, :sh_pro_situation, :sh_pro_state,  :launch_date, :sh_pro_pin, :sh_pro_info)";
+    $sql = "insert into sh_pro (sh_pro_name, sh_pro_en_name, sh_pro_year, sh_pro_price, sh_pro_intro, sh_pro_situation, sh_pro_state, launch_date, sh_pro_pin, sh_pro_info, sh_pro_sold) values ( :sh_pro_name, :sh_pro_en_name, :sh_pro_year, :sh_pro_price, :sh_pro_intro, :sh_pro_situation, :sh_pro_state,  :launch_date, :sh_pro_pin, :sh_pro_info, :sh_pro_sold)";
     
 	//編譯, 執行
     $shPro = $pdo->prepare($sql);
@@ -33,8 +33,9 @@ try{
     $shPro->bindParam(":sh_pro_info", $formData['sh_pro_info']);
     $shPro->bindParam(":sh_pro_situation", $formData['sh_pro_situation']);
     $shPro->bindParam(":sh_pro_state", $formData['sh_pro_state']);
-    $shPro->bindParam(":launch_date", $formData['launch_date']);
+    $shPro->bindParam(":sh_pro_sold",$formData['sh_pro_sold']);
     $shPro->bindParam(":sh_pro_pin", $formData['sh_pro_pin']);
+    $shPro->bindParam(":launch_date", $formData['launch_date']);
 
     $shPro->execute();
 
