@@ -22,7 +22,7 @@ try {
         launch_date = :launch_date,
         end_date = :end_date,
         pro_state = :pro_state,
-        pro_pin = :pro_pin,
+        pro_pin = :pro_pin 
     WHERE 
         pro_id = :pro_id";  
         
