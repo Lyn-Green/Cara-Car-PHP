@@ -12,7 +12,7 @@ try{
         }
 
 	// 检查必填字段是否為空
-    $requiredFields = array("ord_reciever", "ord_city", "ord_district", "ord_address", "ord_phone");
+    $requiredFields = array("sh_ord_reciever", "sh_ord_city", "sh_ord_district", "sh_ord_address", "sh_ord_phone");
     foreach ($requiredFields as $field) {
         if (empty($_POST[$field])) {
             $msg = "請填寫完整資訊才能完成訂購";
@@ -29,15 +29,15 @@ try{
 	$order = $pdo->prepare($sql);	
 
 	$order->bindValue(":member_id", $_POST["member_id"]);
-	$order->bindValue(":ord_reciever", $_POST["sh_ord_reciever"]);
-	$order->bindValue(":ord_city", $_POST["sh_ord_city"]);
-	$order->bindValue(":ord_district", $_POST["sh_ord_district"]);
-	$order->bindValue(":ord_address", $_POST["sh_ord_address"]);
-	$order->bindValue(":ord_phone", $_POST["sh_ord_phone"]);
+	$order->bindValue(":sh_ord_reciever", $_POST["sh_ord_reciever"]);
+	$order->bindValue(":sh_ord_city", $_POST["sh_ord_city"]);
+	$order->bindValue(":sh_ord_district", $_POST["sh_ord_district"]);
+	$order->bindValue(":sh_ord_address", $_POST["sh_ord_address"]);
+	$order->bindValue(":sh_ord_phone", $_POST["sh_ord_phone"]);
 	$order->bindValue(":remark", $_POST["remark"]);
-	$order->bindValue(":ord_ship", $_POST["sh_ord_ship"]);
-	$order->bindValue(":ord_sum", $_POST["sh_ord_sum"]);
-	$order->bindValue(":ord_total", $_POST["sh_ord_total"]);
+	$order->bindValue(":sh_ord_ship", $_POST["sh_ord_ship"]);
+	$order->bindValue(":sh_ord_sum", $_POST["sh_ord_sum"]);
+	$order->bindValue(":sh_ord_total", $_POST["sh_ord_total"]);
 	$order->bindValue(":ord_del_state", $_POST["ord_del_state"]);
 
 
