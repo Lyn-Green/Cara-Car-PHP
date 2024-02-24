@@ -1,16 +1,10 @@
 <?php
 header("Access-Control-Allow-Origin: *"); // 允許所有來源
 header("Content-Type: application/json; charset=UTF-8");
-
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 try {
-    // 連線 MySQL
-    if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-        // 開發環境
-        require_once("../connectChd104g6.php");
-    } else {
-        // 生產環境
-        require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
-    }
+    require_once("../connectChd104g6.php");
     // order_list JOIN order_content JOIN member  指令
     // SQL 查詢
     // $sql = "SELECT * FROM ord_list";  // 修改為您的 SQL 查詢
