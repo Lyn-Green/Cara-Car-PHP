@@ -15,7 +15,17 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT * FROM product";  // 修改為您的 SQL 查詢
+    $sql = "select * , ROUND(pro_price * promo_ratio) as pro_sale
+	from product p
+    join (select MIN(img_id) AS min_img_id, pro_id, img_name from pro_img group by pro_id) AS sub on p.pro_id = sub.pro_id
+    join promo on promo.pro_category =  p.pro_category;";
+    /*  全欄位包含 
+    pro_id, pro_category, pro_name, pro_price, pro_intro, pro_info, launch_date, end_date, pro_state, pro_pin,
+    min_img_id, pro_id, img_name,
+    promo_id, promo_start_date, promo_end_date, promo_name, pro_category, promo_ratio, 
+    pro_sale <- 這一個是自定義欄位，非真實儲存欄位
+    */
+
 
     // 準備 SQL 查詢
     $products = $pdo->prepare($sql);
