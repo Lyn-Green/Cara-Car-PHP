@@ -8,7 +8,7 @@ try {
     require_once("../connectChd104g6.php");
 
     // SQL 查詢
-    $sql = "select * from news ";
+    $sql = "SELECT * FROM news ";
 
     // 準備 SQL 查詢
     $newsList = $pdo->prepare($sql);
