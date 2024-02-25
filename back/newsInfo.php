@@ -4,13 +4,18 @@ header("Content-Type: application/json; charset=UTF-8");
 
 try {
     // 連線 MySQL
-    if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-        // 開發環境
-        require_once("../connectChd104g6.php");
-    } else {
-        // 生產環境
-        require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
-    }
+    // if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
+    //     // 開發環境
+    //     require_once("../connectChd104g6.php");
+    // } else {
+    //     // 生產環境
+    //     require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
+    // }
+
+    // 開發環境
+    require_once("../connectChd104g6.php");
+
+
 
     // SQL 查詢
     $sql = "SELECT * FROM news";  // 修改為您的 SQL 查詢
