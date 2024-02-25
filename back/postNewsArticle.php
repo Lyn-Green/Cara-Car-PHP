@@ -4,17 +4,7 @@ header("Content-Type:application/json;charset=utf-8");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST");
 try{
-	    // // 連線 MySQL
-        // if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-        //     // 開發環境
-        //     require_once("../connectChd104g6.php");
-        // } else {
-        //     // 生產環境
-        //     require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
-        // }
-
-        // 生產環境
-        require_once("../connectChd104g6.php");
+    require_once("../connectChd104g6.php");
 
 
     // 接收從前端發送過來的資料

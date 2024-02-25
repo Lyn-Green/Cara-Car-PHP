@@ -1,6 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *"); // 允許所有來源
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 try {
     // 連線 MySQL
@@ -12,10 +14,7 @@ try {
     //     require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
     // }
 
-    // 開發環境
     require_once("../connectChd104g6.php");
-
-
 
     // SQL 查詢
     $sql = "SELECT * FROM news";  // 修改為您的 SQL 查詢

@@ -5,14 +5,7 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 try {
-    // 連線 MySQL
-    if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-        // 開發環境
-        require_once("../connectChd104g6.php");
-    } else {
-        // 生產環境
-        require_once("https://tibamef2e.com/chd104/g6/api/connectChd104g6.php");
-    }
+    require_once("../connectChd104g6.php");
 
     // 檢查是否有收到值
     if(isset($_POST['admin_state'])) {
