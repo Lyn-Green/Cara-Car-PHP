@@ -9,10 +9,10 @@ try {
 
     $uploadedFile = $_FILES['file'];
     $memberId = $_POST['member_id'];
-    $imgPath = $_POST['img_path']; 
+    $imgPath = $_POST['img_path'];
 
     // 指定前端資料夾路徑
-    $frontendDirectory = 'D:/CARA_CAR/src/assets/imgs/memberImg/';
+    $frontendDirectory = 'C:/wamp64/www/g6/front/src/assets/imgs/memberImg/';
 
     // 指定文件保存路徑
     $targetPath = $frontendDirectory . $imgPath;
@@ -32,7 +32,7 @@ try {
     if (move_uploaded_file($uploadedFile['tmp_name'], $targetPath)) {
         $uploadMemberImgSql = "UPDATE member SET img_path = :imgPath WHERE member_id = :memberId";
         $uploadMemberImgStmt = $pdo->prepare($uploadMemberImgSql);
-        $uploadMemberImgStmt->bindParam(':imgPath', $imgPath); 
+        $uploadMemberImgStmt->bindParam(':imgPath', $imgPath);
         $uploadMemberImgStmt->bindParam(':memberId', $memberId);
         $uploadMemberImgStmt->execute();
 
@@ -41,4 +41,3 @@ try {
 } catch (PDOException $e) {
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
 }
-?>
