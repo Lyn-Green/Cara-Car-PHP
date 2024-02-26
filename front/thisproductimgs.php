@@ -10,9 +10,9 @@ try {
     $pageId = $_GET['pageId'];
 
     // SQL 查詢
-    $sql = "select p_i.img_id, p_i.img_name 
-    from product p join pro_img p_i on p.pro_id = p_i.pro_id
-    where p_i.pro_id = {$pageId}";
+    $sql = "SELECT p_i.img_id, p_i.img_name 
+    FROM product p JOIN pro_img p_i ON p.pro_id = p_i.pro_id
+    WHERE p_i.pro_id = {$pageId}";
 
     // 準備 SQL 查詢
     $proImgs = $pdo->prepare($sql);

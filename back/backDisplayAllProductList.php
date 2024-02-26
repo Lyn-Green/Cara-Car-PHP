@@ -8,10 +8,10 @@ try {
     require_once("../connectChd104g6.php");
 
     // SQL 查詢
-    $sql = "SELECT * , ROUND(p.pro_price * pm.min_promo_ratio) AS pro_sale
+    $sql = "SELECT p.*, ROUND(p.pro_price * pm.min_promo_ratio) AS pro_sale, pi.img_name, pm.min_promo_ratio, pm.promo_name
 	FROM product p
-    JOIN (SELECT MIN(img_id) AS min_img_id, pro_id, img_name FROM pro_img GROUP BY pro_id) AS sub ON p.pro_id = sub.pro_id
-    JOIN (SELECT MIN(promo_ratio) AS min_promo_ratio, pro_category, promo_name FROM promo) AS pm ON pm.pro_category =  p.pro_category;";
+    LEFT JOIN (SELECT MIN(img_id) AS min_img_id, pro_id, img_name FROM pro_img GROUP BY pro_id) AS pi ON p.pro_id = pi.pro_id
+    LEFT JOIN (SELECT MIN(promo_ratio) AS min_promo_ratio, pro_category, promo_name FROM promo) AS pm ON pm.pro_category =  p.pro_category;";
 
     // 準備 SQL 查詢
     $products = $pdo->prepare($sql);
