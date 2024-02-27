@@ -16,7 +16,7 @@ try{
     news_content = :news_content, 
     news_start_date = :news_start_date, 
     news_end_date = :news_end_date, 
-    img_path = :img_path, 
+    -- img_path = :img_path, 
     news_category = :news_category,
     news_state = :news_state
     WHERE 
@@ -37,7 +37,7 @@ try{
     $stmt->bindParam(":news_content", $_POST['eventInformation']);
     $stmt->bindParam(":news_start_date", $_POST['startDate']);
     $stmt->bindParam(":news_end_date", $_POST['endDate']);
-    $stmt->bindParam(":img_path", $_POST['eventImg']);
+    // $stmt->bindParam(":img_path", $_POST['eventImg']);
     $stmt->bindParam(":news_category", $_POST['classify']);
     $stmt->bindParam(":news_state", $_POST['eventState']);
 
