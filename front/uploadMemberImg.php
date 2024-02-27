@@ -18,7 +18,7 @@ try {
     // 指定文件保存路徑
     $targetPath = $frontendDirectory . $imgPath;
 
-    // 檢查目標文件夾是否存在，如果不存在則創建
+    // 檢查目標文件夾是否存在，如果不存在則創建。 0777為最大權限設定 / true則為Boolean欄位
     if (!file_exists($frontendDirectory)) {
         mkdir($frontendDirectory, 0777, true);
     }
