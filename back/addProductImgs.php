@@ -24,8 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pro_id = $_POST['pro_id'];
 
             // ---------指定要存的圖片路徑---------------------
-            // $targetDirectory = 'C:/Users/T14 Gen 3/Desktop/admin/src/assets/images/banner/';  //筆電
-            $targetDirectory = '../../imgs/';  // 測試
+            $targetDirectory = '../../imgs/new_products/';  // 當前檔案的上上層資料夾的imgs/
             // ------------------------------------------------
 
             // 存進資料庫的檔案名稱 "banner"+檔名+副檔名

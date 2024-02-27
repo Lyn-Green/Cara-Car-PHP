@@ -8,10 +8,27 @@ try {
     require_once("../connectChd104g6.php");
 
     // SQL 查詢
-    $sql = "SELECT p.*, ROUND(p.pro_price * pm.min_promo_ratio) AS pro_sale, pi.img_name, pm.min_promo_ratio, pm.promo_name
-	FROM product p
-    LEFT JOIN (SELECT MIN(img_id) AS min_img_id, pro_id, img_name FROM pro_img GROUP BY pro_id) AS pi ON p.pro_id = pi.pro_id
-    LEFT JOIN (SELECT MIN(promo_ratio) AS min_promo_ratio, pro_category, promo_name FROM promo) AS pm ON pm.pro_category =  p.pro_category;";
+    $sql = "SELECT p.*, 
+                ROUND(p.pro_price * COALESCE(pm.min_promo_ratio, 1)) AS pro_sale, 
+                pi.img_name AS img_name, 
+                COALESCE(pm.min_promo_ratio, 1) AS min_promo_ratio, 
+                COALESCE(pm.promo_name, '無活動') AS promo_name
+            FROM product p
+            LEFT JOIN (
+                SELECT pro_id, img_name 
+                FROM pro_img AS t1 
+                WHERE img_id = (
+                    SELECT MIN(img_id) 
+                    FROM pro_img AS t2 
+                    WHERE t1.pro_id = t2.pro_id
+                )
+            ) AS pi ON p.pro_id = pi.pro_id
+            LEFT JOIN (
+                SELECT MIN(promo_ratio) AS min_promo_ratio, pro_category, COALESCE(promo_name, '無活動') AS promo_name 
+                FROM promo 
+                WHERE promo_state = 1
+                GROUP BY pro_category
+            ) AS pm ON pm.pro_category =  p.pro_category;";
 
     // 準備 SQL 查詢
     $products = $pdo->prepare($sql);

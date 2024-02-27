@@ -8,9 +8,25 @@ try {
     require_once("../connectChd104g6.php");
 
     // SQL 查詢
-    $sql = "select *
-	from product p
-    join (select MIN(img_id) AS min_img_id, pro_id, img_name from pro_img group by pro_id) AS sub on p.pro_id = sub.pro_id;";
+    $sql = "SELECT p.*,
+            sub.img_name ,
+            ROUND(p.pro_price * COALESCE(pm.min_promo_ratio, 1)) AS pro_sale,
+            pm.promo_state,
+            pm.promo_name
+	FROM product p
+    LEFT JOIN (
+        SELECT MIN(img_id) AS min_img_id, pro_id, img_name 
+        FROM pro_img GROUP BY pro_id
+        ) 
+        AS sub ON p.pro_id = sub.pro_id
+    LEFT JOIN (
+        SELECT MIN(promo_ratio) AS min_promo_ratio, pro_category , promo_name, promo_state 
+        FROM promo 
+        WHERE promo_state = 1
+        GROUP BY pro_category
+    ) AS pm ON pm.pro_category = p.pro_category
+    WHERE p.pro_state = 0
+    ORDER BY p.pro_pin DESC, p.pro_id ASC;";
 
     // 準備 SQL 查詢
     $productList = $pdo->prepare($sql);
