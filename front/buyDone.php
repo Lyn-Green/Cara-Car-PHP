@@ -1,11 +1,15 @@
 <?php
+// session_start();
 header("Access-Control-Allow-Origin: *"); // 允許所有來源
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+
+
 try{
     require_once("../connectChd104g6.php");
 
+	$pdo->beginTransaction();
 	// 检查必填字段是否為空
     $requiredFields = array("ord_reciever", "ord_city", "ord_district", "ord_address", "ord_phone");
     foreach ($requiredFields as $field) {
@@ -23,27 +27,31 @@ try{
 	//編譯, 執行
 	$order = $pdo->prepare($sql);	
 
-	$order->bindValue(":member_id", $_POST["member_id"]);
-	$order->bindValue(":ord_reciever", $_POST["ord_reciever"]);
-	$order->bindValue(":ord_city", $_POST["ord_city"]);
-	$order->bindValue(":ord_district", $_POST["ord_district"]);
-	$order->bindValue(":ord_address", $_POST["ord_address"]);
-	$order->bindValue(":ord_phone", $_POST["ord_phone"]);
-	$order->bindValue(":remark", $_POST["remark"]);
-	$order->bindValue(":ord_ship", $_POST["ord_ship"]);
-	$order->bindValue(":ord_sum", $_POST["ord_sum"]);
-	$order->bindValue(":ord_total", $_POST["ord_total"]);
-	$order->bindValue(":ord_del_state", $_POST["ord_del_state"]);
-
+	$order->bindParam(":member_id", $_POST["member_id"]);
+	$order->bindParam(":ord_reciever", $_POST["ord_reciever"]);
+	$order->bindParam(":ord_city", $_POST["ord_city"]);
+	$order->bindParam(":ord_district", $_POST["ord_district"]);
+	$order->bindParam(":ord_address", $_POST["ord_address"]);
+	$order->bindParam(":ord_phone", $_POST["ord_phone"]);
+	$order->bindParam(":remark", $_POST["remark"]);
+	$order->bindParam(":ord_ship", $_POST["ord_ship"]);
+	$order->bindParam(":ord_sum", $_POST["ord_sum"]);
+	$order->bindParam(":ord_total", $_POST["ord_total"]);
+	$order->bindParam(":ord_del_state", $_POST["ord_del_state"]);
 
 	$order->execute();
 
+	// $pdo->commit();
+	$ordId = $pdo->lastInsertId();
+	$_SESSION['ordId'] = $ordId;
+
+	
     $msg = "完成訂購";
 }
 catch (PDOException $e) {
 	$msg = "錯誤行號 : ".$e->getLine().", 錯誤訊息 : ".$e->getMessage();
 }
 //輸出結果
-$result = ["msg"=>$msg];
+$result = ["msg"=>$msg, "ordId"=>$ordId];
 echo json_encode($result);
 ?>

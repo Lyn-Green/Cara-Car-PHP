@@ -8,17 +8,17 @@ try {
     require_once("../connectChd104g6.php");
 
     $uploadedFile = $_FILES['file'];
-    $memberId = $_POST['member_id'];
+    $newsId = $_POST['news_id'];
     $imgPath = $_POST['img_path'];
 
     // 指定前端資料夾路徑
-    $frontendDirectory = 'C:/wamp64/www/g6/front/src/assets/imgs/memberImg/'; //本地端
-    // $frontendDirectory = '../../imgs/memberImgs/'; //雲端
+    $frontendDirectory = 'C:/wamp64/www/g6/imgs/event/'; //本地端
+    // $frontendDirectory = '../../imgs/event/'; //雲端
 
     // 指定文件保存路徑
     $targetPath = $frontendDirectory . $imgPath;
 
-    // 檢查目標文件夾是否存在，如果不存在則創建。 0777為最大權限設定 / true則為Boolean欄位
+    // 檢查目標文件夾是否存在，如果不存在則創建
     if (!file_exists($frontendDirectory)) {
         mkdir($frontendDirectory, 0777, true);
     }
@@ -31,11 +31,11 @@ try {
 
     // 移動上傳的文件到指定路徑
     if (move_uploaded_file($uploadedFile['tmp_name'], $targetPath)) {
-        $uploadMemberImgSql = "UPDATE member SET img_path = :imgPath WHERE member_id = :memberId";
-        $uploadMemberImgStmt = $pdo->prepare($uploadMemberImgSql);
-        $uploadMemberImgStmt->bindParam(':imgPath', $imgPath);
-        $uploadMemberImgStmt->bindParam(':memberId', $memberId);
-        $uploadMemberImgStmt->execute();
+        $uploadNewsImgSql = "UPDATE news SET img_path = :img_path WHERE news_id = :news_id";
+        $uploadNewsImgStmt = $pdo->prepare($uploadNewsImgSql);
+        $uploadNewsImgStmt->bindParam(':img_path', $imgPath);
+        $uploadNewsImgStmt->bindParam(':news_id', $newsId);
+        $uploadNewsImgStmt->execute();
 
         echo json_encode(["msg" => "Y", "imgPath" => $imgPath]);
     }
