@@ -6,11 +6,11 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 // 引入數據庫連接文件
 require_once("../connectChd104g6.php");
-$pro_id = $_POST['pro_id'];
+$sh_pro_id = $_POST['sh_pro_id'];
 // 檢查請求方法是否為 POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 檢查是否接收到了圖片
-    if (isset($_POST['pro_id']) && isset($_FILES['image'])) { 
+    if (isset($_POST['sh_pro_id']) && isset($_FILES['image'])) { 
         // 處理每張圖片
         foreach ($_FILES['image']
         ['tmp_name'] as $key => $tmp_name) {
@@ -20,12 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $fileName = pathinfo($uploadedFileName, PATHINFO_FILENAME);
             // 獲取副檔名
             $extension = pathinfo($uploadedFileName, PATHINFO_EXTENSION);
-            // 定義pro_id
-            $pro_id = $_POST['pro_id'];
+            // 定義sh_pro_id
+            $sh_pro_id = $_POST['sh_pro_id'];
 
             // ---------指定要存的圖片路徑---------------------
             // $targetDirectory = 'C:/Users/T14 Gen 3/Desktop/admin/src/assets/images/banner/';  //筆電
-            $targetDirectory = '../../imgs/';  // 測試
+            $targetDirectory = '../../imgs/sh_products/';  // 測試
             // ------------------------------------------------
 
             // 存進資料庫的檔案名稱 "banner"+檔名+副檔名
@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 try {
                     // 將檔案名稱插入到資料庫中
                     $query = $pdo->prepare(
-                        "INSERT INTO pro_img (pro_id, img_name) VALUES 
-                        (:pro_id ,:fileName)"
+                        "INSERT INTO sh_pro_img (sh_pro_id, img_name) VALUES 
+                        (:sh_pro_id ,:fileName)"
                     );
                     // 使用bindParam()防止 SQL 注入攻擊   可以不寫
                     $query->bindParam(':fileName', $copyFile);
-                    $query->bindParam(':pro_id', $pro_id);
+                    $query->bindParam(':sh_pro_id', $sh_pro_id);
                     // 如果執行成功，execute()不會返回任何值 有錯誤發生會拋出一個 PDOException 
                     $query->execute();
                 } catch (PDOException $e) {
