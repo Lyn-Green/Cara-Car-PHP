@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 header("Access-Control-Allow-Origin:*");
 header("Content-Type:application/json;charset=utf-8");
 // $cart = file_get_contents("php://input");
@@ -36,10 +36,6 @@ try{
 		//編譯, 執行
 		$order = $pdo->prepare($sql);	
 
-		// $ordId = $_SESSION['ordId'];
-		// $ordId = getOrdId();
-		
-		// $order->bindParam(":ord_id", $ordId);
 		$order->bindParam(":ord_id", $item["ord_id"]);
 		$order->bindParam(":pro_id", $item["pro_id"]);
 		$order->bindParam(":pro_name", $item["pro_name"]);

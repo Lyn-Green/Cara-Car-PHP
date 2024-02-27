@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 header("Access-Control-Allow-Origin: *"); // 允許所有來源
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -39,19 +39,19 @@ try{
 	$order->bindParam(":ord_total", $_POST["ord_total"]);
 	$order->bindParam(":ord_del_state", $_POST["ord_del_state"]);
 
-
 	$order->execute();
+
+	// $pdo->commit();
 	$ordId = $pdo->lastInsertId();
-	
 	$_SESSION['ordId'] = $ordId;
 
-	$pdo->commit();
+	
     $msg = "完成訂購";
 }
 catch (PDOException $e) {
 	$msg = "錯誤行號 : ".$e->getLine().", 錯誤訊息 : ".$e->getMessage();
 }
 //輸出結果
-$result = ["msg"=>$msg];
+$result = ["msg"=>$msg, "ordId"=>$ordId];
 echo json_encode($result);
 ?>

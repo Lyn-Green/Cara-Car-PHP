@@ -9,17 +9,10 @@ try {
     // SQL 查詢
     // $sql = "SELECT * FROM ord_list";  // 修改為您的 SQL 查詢
     //多張表單join 查詢
-<<<<<<< HEAD
-    $sql =
-        "SELECT L.ord_id, L.member_id, L.ord_date, L.ord_reciever, L.ord_city, L.ord_district, L.ord_address, L.ord_phone, L.remark, L.ord_ship, L.ord_sum, L.ord_total, L.ord_del_state, C.pro_id, C.pro_name, C.ord_qty, C.pro_price, C.promo_ratio, C.pro_sale, C.ord_sum, M.m_name 
-    FROM ord_list L LEFT JOIN ord_content C ON L.ord_id = C.ord_id 
-                    LEFT JOIN member M ON L.member_id = M.member_id ";
-=======
     $sql = 
     "select L.ord_id, L.member_id, L.ord_date, L.ord_reciever, L.ord_city, L.ord_district, L.ord_address, L.ord_phone, L.remark, L.ord_ship, L.ord_sum, L.ord_total, L.ord_del_state, C.pro_id, C.pro_name, C.ord_qty, C.pro_price, C.promo_ratio, C.pro_sale, M.m_name 
     from ord_list L join ord_content C on L.ord_id = C.ord_id 
                     join member M on L.member_id = M.member_id ";
->>>>>>> K
 
     // 準備 SQL 查詢
     $order = $pdo->prepare($sql);
