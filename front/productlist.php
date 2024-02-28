@@ -9,16 +9,20 @@ try {
 
     // SQL 查詢
     $sql = "SELECT p.*,
-            sub.img_name ,
+            pi.img_name ,
             ROUND(p.pro_price * COALESCE(pm.min_promo_ratio, 1)) AS pro_sale,
             pm.promo_state,
             pm.promo_name
 	FROM product p
     LEFT JOIN (
-        SELECT MIN(img_id) AS min_img_id, pro_id, img_name 
-        FROM pro_img GROUP BY pro_id
-        ) 
-        AS sub ON p.pro_id = sub.pro_id
+        SELECT pro_id, img_name 
+                FROM pro_img AS t1 
+                WHERE img_id = (
+                    SELECT MIN(img_id) 
+                    FROM pro_img AS t2 
+                    WHERE t1.pro_id = t2.pro_id
+                )
+            ) AS pi ON p.pro_id = pi.pro_id
     LEFT JOIN (
         SELECT MIN(promo_ratio) AS min_promo_ratio, pro_category , promo_name, promo_state 
         FROM promo 
