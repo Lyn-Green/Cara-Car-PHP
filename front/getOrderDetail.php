@@ -10,7 +10,8 @@ header("Access-Control-Allow-Headers: Content-Type");
 
     $sql ="SELECT OC.*, OL.member_id FROM ord_content OC 
             JOIN ord_list OL ON OL.ord_id = OC.ord_id
-            WHERE OL.member_id = :member_id";
+            WHERE OL.member_id = :member_id
+            GROUP BY pro_id";
             
 
     // 準備 SQL 查詢
