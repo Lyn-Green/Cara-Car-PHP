@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 header("Access-Control-Allow-Origin:*");
 header("Content-Type:application/json;charset=utf-8");
 // $cart = file_get_contents("php://input");

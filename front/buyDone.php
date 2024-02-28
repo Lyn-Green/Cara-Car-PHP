@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 header("Access-Control-Allow-Origin: *"); // 允許所有來源
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
