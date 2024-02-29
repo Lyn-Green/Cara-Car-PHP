@@ -21,6 +21,19 @@ try {
     ) AS pi ON p.sh_pro_id = pi.sh_pro_id
     ORDER BY sh_pro_id;";
 
+    // $sql = "SELECT p.*, pi.img_name
+    // FROM sh_pro AS p
+    // LEFT JOIN (                                -----> 使用 LEFT JOIN 聯結 sh_pro_img 表，並將結果別名為 pi，以 sh_pro_id 作為關聯欄位。
+    //     SELECT sh_pro_id, img_name 
+    //     FROM sh_pro_img AS t1 
+    //     WHERE img_id = (                       ----->在主查詢中使用了一個子查詢，目的是從 sh_pro_img 表中選擇每個商品的第一張圖片
+    //         SELECT MIN(img_id)                 ----->限制 t1 的選擇，只選擇符合子查詢條件的資料
+    //         FROM sh_pro_img AS t2              ----->用來找到每個商品的最小 img_id
+    //         WHERE t1.sh_pro_id = t2.sh_pro_id
+    //     )
+    // ) AS pi ON p.sh_pro_id = pi.sh_pro_id
+    // ORDER BY sh_pro_id;";
+
     // 準備 SQL 查詢
     $products = $pdo->prepare($sql);
 

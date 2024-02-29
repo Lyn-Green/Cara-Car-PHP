@@ -12,6 +12,7 @@ try {
     // 接收從前端發送過來的資料
     $formData = json_decode(file_get_contents("php://input"), true);
     // SQL 
+    // 使用 UPDATE 語句，更新 sh_pro 表中的特定商品。
     $sql = "UPDATE sh_pro SET 
         sh_pro_name = :sh_pro_name,
         sh_pro_en_name = :sh_pro_en_name,
@@ -27,7 +28,7 @@ try {
     WHERE 
         sh_pro_id = :sh_pro_id";  
         
-        
+        // 透過 bindParam 方法將更新的值綁定到 SQL 語句中，以防止 SQL 注入攻擊。
         // 準備 SQL 更新
         $shPro = $pdo->prepare($sql);
         // //將資料放入並執行之
