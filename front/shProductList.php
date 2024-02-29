@@ -8,9 +8,19 @@ try {
     require_once("../connectChd104g6.php");
 
     // SQL 查詢
-    $sql =  $sql = "select *
-	from sh_pro
-    join (select MIN(img_id) AS min_img_id, sh_pro_id, img_name from sh_pro_img group by sh_pro_id) AS sub on sh_pro.sh_pro_id = sub.sh_pro_id;";
+    $sql =  "SELECT P.*,
+                pi.img_name
+                    FROM sh_pro P
+                    LEFT JOIN (
+                        SELECT sh_pro_id, img_name 
+                        FROM sh_pro_img AS t1 
+                        WHERE img_id = (
+                            SELECT MIN(img_id) 
+                            FROM sh_pro_img AS t2 
+                            WHERE t1.sh_pro_id = t2.sh_pro_id
+                        )
+                    ) AS pi ON P.sh_pro_id = pi.sh_pro_id
+                    WHERE P.sh_pro_state = 1;";
 
     $shProduct = $pdo->prepare($sql);
 
