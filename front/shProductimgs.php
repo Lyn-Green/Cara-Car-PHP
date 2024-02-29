@@ -10,9 +10,9 @@ try {
     $pageId = $_GET['pageId'];
 
     // SQL 查詢
-    $sql = "select sh_pro_img.img_id, sh_pro_img.img_name 
-    from sh_pro join sh_pro_img on sh_pro.sh_pro_id = sh_pro_img.sh_pro_id
-    where sh_pro_img.sh_pro_id = {$pageId}";
+    $sql = "SELECT sh_pro_img.img_id, sh_pro_img.img_name 
+    FROM sh_pro JOIN sh_pro_img ON sh_pro.sh_pro_id = sh_pro_img.sh_pro_id
+    WHERE sh_pro_img.sh_pro_id = {$pageId}";
 
 
     // 準備 SQL 查詢
@@ -31,4 +31,3 @@ try {
 } catch (PDOException $e) {
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
 }
-?>
