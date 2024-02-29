@@ -8,7 +8,9 @@ try {
     require_once("../connectChd104g6.php");
 
     // SQL 查詢
-    $sql = "SELECT * FROM news";  // 修改為您的 SQL 查詢
+    $sql = "SELECT * FROM news
+            WHERE news_state = 0";  // 修改為您的 SQL 查詢
+    
 
     // 準備 SQL 查詢
     $products = $pdo->prepare($sql);

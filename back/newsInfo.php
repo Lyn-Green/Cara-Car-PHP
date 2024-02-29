@@ -17,7 +17,11 @@ try {
     require_once("../connectChd104g6.php");
 
     // SQL 查詢
-    $sql = "SELECT * FROM news";  // 修改為您的 SQL 查詢
+    $sql = "SELECT * FROM news";
+
+    // 用 ORDER BY 篩選會壞掉
+    // $sql = "SELECT * FROM news
+    //         ORDER BY news_state, news_id";
 
     // 準備 SQL 查詢
     $news = $pdo->prepare($sql);
