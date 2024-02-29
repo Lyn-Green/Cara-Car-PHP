@@ -7,8 +7,19 @@ header("Access-Control-Allow-Headers: Content-Type");
 try {
     require_once("../connectChd104g6.php");
 
-    // SQL 查詢
-    $sql = "SELECT * FROM sh_pro ORDER BY sh_pro_id";  // 修改為您的 SQL 查詢
+    // SQL 查詢"SELECT * FROM sh_pro ORDER BY sh_pro_id";
+    $sql = "SELECT p.*, pi.img_name
+    FROM sh_pro AS p
+    LEFT JOIN (
+        SELECT sh_pro_id, img_name 
+        FROM sh_pro_img AS t1 
+        WHERE img_id = (
+            SELECT MIN(img_id) 
+            FROM sh_pro_img AS t2 
+            WHERE t1.sh_pro_id = t2.sh_pro_id
+        )
+    ) AS pi ON p.sh_pro_id = pi.sh_pro_id
+    ORDER BY sh_pro_id;";
 
     // 準備 SQL 查詢
     $products = $pdo->prepare($sql);
