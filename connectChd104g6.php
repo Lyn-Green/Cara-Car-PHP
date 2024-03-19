@@ -2,23 +2,23 @@
 	//建立表單名稱,使用者名稱,密碼,port，建立$dsn去連線資料庫，建立options是表單設定,可用可不用，最後建立PDO物件 new PDO(驗證)
 	
 	// 本地端localhost DataBase
-	// $dbname = "chd104g6";
-	// $user = "root";
-	// $password = "";
-	// $port ="3306";
+	$dbname = "tibamefe_chd104g6";
+	$user = "root";
+	$password = "";
+	$port ="3306";
 
 	// 緯育Tibame雲端DataBase
 	// $dbname = "tibamefe_chd104g6";
 	// $user = "tibamefe_since2021";
 	// $password = "vwRBSb.j&K#E";
 	// $port ="3306";
-	// $host = "localhost";
+	$host = "localhost";
 	// AWS的雲端DataBase
-	$dbname = "chd104g6";
-	$user = "dev";
-	$password = "Chd104g6";
-	$port ="3306";
-	$host = "chd104g6.ch44i2mqiwrj.ap-southeast-2.rds.amazonaws.com";
+	// $dbname = "chd104g6";
+	// $user = "dev";
+	// $password = "Chd104g6";
+	// $port ="3306";
+	// $host = "chd104g6.ch44i2mqiwrj.ap-southeast-2.rds.amazonaws.com";
 	$dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8";;
 	$options = array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
 

@@ -12,8 +12,8 @@ try {
     $imgPath = $_POST['img_path'];
 
     // 指定前端資料夾路徑
-    // $frontendDirectory = 'C:/wamp64/www/g6/front/src/assets/imgs/memberImg/'; //本地端
-    $frontendDirectory = '../../imgs/memberImgs/'; //雲端
+    $frontendDirectory = 'C:/wamp64/www/g6/front/src/assets/imgs/memberImg/'; //本地端
+    // $frontendDirectory = '../../imgs/memberImgs/'; //雲端
 
     // 指定文件保存路徑
     $targetPath = $frontendDirectory . $imgPath;
